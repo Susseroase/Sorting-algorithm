@@ -31,22 +31,24 @@ namespace Sorting
             nodes[_second].SetSelected(_selectedState);
         }
 
-        // Start is called before the first frame update
+        public void ShuffleNodes()
+        {
+            StartCoroutine(Shuffle(generatedNodes));
+        }
+
         void Awake()
         {
-            generatedNodes = new Node[nodeCount];
-            nodes = new Node[nodeCount];
+            //Initialize variables
+            generatedNodes  = new Node[nodeCount];
+            nodes           = new Node[nodeCount];
+
+            //Create starting node sequence
             NodeFactory.Setup(gameObject, nodeCount);
 
             for(int i = 0; i < nodeCount; i++)
             {
                generatedNodes[i] = NodeFactory.Create(i);
             }
-        }
-
-        public void ShuffleNodes()
-        {
-            StartCoroutine(Shuffle(generatedNodes));
         }
 
         private IEnumerator Shuffle(Node[] _nodes)
