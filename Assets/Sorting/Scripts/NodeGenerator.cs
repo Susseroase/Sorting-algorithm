@@ -18,6 +18,8 @@ namespace Sorting
 
         private bool isShuffled = false;
 
+        private NodeFactory factory;
+
         public void SetNodes(Node[] _sorted)
         {
             nodes = _sorted;
@@ -38,7 +40,7 @@ namespace Sorting
 
         void Awake()
         {
-            //Initialize variables
+            //Initialize and reference
             generatedNodes  = new Node[nodeCount];
             nodes           = new Node[nodeCount];
 

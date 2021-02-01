@@ -5,34 +5,42 @@ namespace Sorting
 {
     public class SelectionSorter : BaseSorter
     {
-        //Need 2 loops
-        //[5,2,4,3,1], first compare 5 and 2, if 5 is greater then swap the 2, then 5 again, and p
-        //[2,3,1,4,5]
-        //[1,2,3,4,5]
+        //[5,2,4,3,1]
+        //looks at the first element, number 5, at index 0. 
+        //As it moves to the next number, it replaces 5 for the next smaller number
+        //Then at the end, it flips the smallest number to the index 0
+        //[1, 2, 4, 3, 1]
+        // Next, it start the loop at index 1, because it knows index 0 is correct.
 
 
         protected override IEnumerator Sort()
         {
             int nodeCount = nodes.Length;
+            int smallest; //This is actually the smallest item index, not the item value.
+            int old; // not part of the algorithm, just for visualization
 
             Node tempNode;
 
-            //-2 because we can't swap the final number out of the array.
-            for (int i = 0; i <= nodeCount - 2; i++)
+            for (int i = 0; i < nodeCount - 1; i++)
             {
-                for (int j = 0; j <= nodeCount - 2; j++)
+                //Assign the smallest number to the loop's iterator
+                smallest = i;
+                old = i;
+
+                //loop this iteration to the end
+                for (int j = i + 1; j < nodeCount; j++)
                 {
-                    //If the current is a number greater than the one after?
-                    if (nodes[j].Index > nodes[j + 1].Index)
+                    //Compare this index to the current smallest index item
+                    if (nodes[j].Index < nodes[smallest].Index)
                     {
                         //Swap thye element
                         //Store the next element in a temp variable
-                        tempNode = nodes[j + 1];
+                        tempNode = nodes[smallest];
 
                         //Set the next element to the current one
-                        nodes[j + 1] = nodes[j];
+                        nodes[smallest] = nodes[old];
 
-                        nodes[j] = tempNode;
+                        nodes[old] = tempNode;
 
 
                         //Simply visualization, not part of algorithm
